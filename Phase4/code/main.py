@@ -14,7 +14,7 @@ def main():
     Test way:
     delete all contents in the two .txt files starting with "new", then run:
     cd <path_to_this_folder>
-    python3 main.py oldMasterFile.txt mergedTxnFile.txt newMasterFile.txt newCurrentFile.txt
+    python3 main.py test_old_master.txt test_merged_txns.txt new_master_account.txt new_current_account.txt
     """
     if len(sys.argv) < 5:
         print("Usage: python3 main.py <oldMasterFile> <mergedTxnFile> <newMasterFile> <newCurrentFile>")
