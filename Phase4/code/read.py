@@ -20,11 +20,11 @@ def read_old_bank_accounts(file_path):
 
             try:
                 # Extract fields with positional validation
-                account_number = clean_line[0:5]      # 5 chars (0-4)
-                name = clean_line[6:26]               # 20 chars (6-25)
-                status = clean_line[27]               # 1 char (27)
-                balance_str = clean_line[29:37]       # 8 chars (29-36)
-                transactions_str = clean_line[38:42]   # 4 chars (38-41)
+                account_number = clean_line[0:5]
+                name = clean_line[6:26]
+                status = clean_line[27]
+                balance_str = clean_line[29:37]
+                transactions_str = clean_line[38:42]
 
                 # Validate account number format (5 digits)
                 if not account_number.isdigit():
@@ -70,7 +70,7 @@ def read_old_bank_accounts(file_path):
                     'status': status,
                     'balance': balance,
                     'total_transactions': transactions,
-                    'plan': "NP"  # Default to NP (No Plan)
+                    'plan': "NP"  # Default to NP (Non student)
                 })
 
             except Exception as e:

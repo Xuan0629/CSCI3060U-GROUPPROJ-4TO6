@@ -53,8 +53,7 @@ class TransactionProcessor:
                     'plan': "NP"
                 }
                 continue
-
-            # Handle account deletion 
+ 
             elif code == "06":  # delete (no fee)
                 del self.accounts[txn.acctNum]
                 continue
@@ -62,7 +61,6 @@ class TransactionProcessor:
             # Get account and set fee
             account = self.accounts[txn.acctNum]
             feePerTransaction = 0.05 if account['plan'] == "SP" else 0.10
-            # feePerTransaction = 0.05
 
             # Process different transaction types
             if code == "01":  # withdrawal
