@@ -3,6 +3,8 @@ from print_error import log_constraint_error
 def write_new_current_accounts(accounts, file_path):
     """
     Writes Current Bank Accounts File with strict format validation.
+    Format: NNNNN_AAAAAAAAAAAAAAAAAAAA_S_PPPPPPPP_YY
+    Where YY is either SP (student plan) or NP (non-student plan)
     Raises ValueError for invalid data to enable testing.
     """
     with open(file_path, 'w') as file:
@@ -34,23 +36,30 @@ def write_new_current_accounts(accounts, file_path):
                     log_constraint_error("Constraint Error", f"Balance out of range: {acc['balance']}")
                     raise ValueError(f"Balance out of range: {acc['balance']}")
 
+                # Validate plan type
+                if acc['plan'] not in ('SP', 'NP'):
+                    log_constraint_error("Constraint Error", f"Invalid plan type: {acc['plan']}")
+                    raise ValueError(f"Invalid plan type: {acc['plan']}")
+
                 # Format fields
                 acc_num = acc['account_number'].zfill(5)
                 name = acc['name'].ljust(20, '_')
                 balance = f"{acc['balance']:08.2f}"
 
-                file.write(f"{acc_num}_{name}_{acc['status']}_{balance}\n")
+                file.write(f"{acc_num}_{name}_{acc['status']}_{balance}_{acc['plan']}\n")
             
             except ValueError as e:
                 # Let the ValueError propagate up after logging
                 raise e
         
         # Add END_OF_FILE marker
-        file.write("00000_END_OF_FILE__________A_00000.00\n")
+        file.write("00000_END_OF_FILE__________A_00000.00_NP\n")
 
 def write_new_master_bank_accounts(accounts, file_path):
     """
     Writes Master Bank Accounts File with strict format validation.
+    Format: NNNNN_AAAAAAAAAAAAAAAAAAAA_S_PPPPPPPP_TTTT_YY
+    Where YY is either SP (student plan) or NP (non-student plan)
     Raises ValueError for invalid data to enable testing.
     """
     with open(file_path, 'w') as file:
@@ -90,17 +99,22 @@ def write_new_master_bank_accounts(accounts, file_path):
                     log_constraint_error("Constraint Error", f"Transaction count out of range: {acc['total_transactions']}")
                     raise ValueError(f"Transaction count out of range: {acc['total_transactions']}")
 
+                # Validate plan type
+                if acc['plan'] not in ('SP', 'NP'):
+                    log_constraint_error("Constraint Error", f"Invalid plan type: {acc['plan']}")
+                    raise ValueError(f"Invalid plan type: {acc['plan']}")
+
                 # Format fields
                 acc_num = acc['account_number'].zfill(5)
                 name = acc['name'].ljust(20, '_')
                 balance = f"{acc['balance']:08.2f}"
                 transactions = str(acc['total_transactions']).zfill(4)
 
-                file.write(f"{acc_num}_{name}_{acc['status']}_{balance}_{transactions}\n")
+                file.write(f"{acc_num}_{name}_{acc['status']}_{balance}_{transactions}_{acc['plan']}\n")
 
             except ValueError as e:
                 # Let the ValueError propagate up after logging
                 raise e
             
         # Add END_OF_FILE marker
-        file.write("00000_END_OF_FILE__________A_00000.00_0000\n")
+        file.write("00000_END_OF_FILE__________A_00000.00_0000_NP\n") 

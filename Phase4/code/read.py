@@ -5,7 +5,8 @@ def read_old_bank_accounts(file_path):
     """
     Reads and validates the bank account file format
     Returns list of accounts and prints fatal errors for invalid format
-    Format: NNNNN_AAAAAAAAAAAAAAAAAAAA_S_PPPPPPPP_TTTT (42 chars total)
+    Format: NNNNN_AAAAAAAAAAAAAAAAAAAA_S_PPPPPPPP_TTTT_YY (45 chars total)
+    Where YY is either SP (student plan) or NP (non-student plan)
     """
     accounts = []
     with open(file_path, 'r') as file:
@@ -14,17 +15,18 @@ def read_old_bank_accounts(file_path):
             clean_line = line.rstrip('\n')
             
             # Validate line length
-            if len(clean_line) != 42:
+            if len(clean_line) != 45:
                 log_constraint_error("Fatal error", f"Line {line_num}: Invalid length ({len(clean_line)} chars)")
                 continue
 
             try:
                 # Extract fields with positional validation
-                account_number = clean_line[0:5]
-                name = clean_line[6:26]
-                status = clean_line[27]
-                balance_str = clean_line[29:37]
-                transactions_str = clean_line[38:42]
+                account_number = clean_line[0:5]      # 5 chars (0-4)
+                name = clean_line[6:26]               # 20 chars (6-25)
+                status = clean_line[27]               # 1 char (27)
+                balance_str = clean_line[29:37]       # 8 chars (29-36)
+                transactions_str = clean_line[38:42]   # 4 chars (38-41)
+                plan = clean_line[43:45]              # 2 chars (43-44)
 
                 # Validate account number format (5 digits)
                 if not account_number.isdigit():
@@ -34,6 +36,11 @@ def read_old_bank_accounts(file_path):
                 # Validate status
                 if status not in ('A', 'D'):
                     log_constraint_error("Fatal error", f"Line {line_num}: Invalid status '{status}'")
+                    continue
+
+                # Validate plan type
+                if plan not in ('SP', 'NP'):
+                    log_constraint_error("Fatal error", f"Line {line_num}: Invalid plan type '{plan}'")
                     continue
 
                 # Validate balance format (XXXXX.XX)
@@ -70,7 +77,7 @@ def read_old_bank_accounts(file_path):
                     'status': status,
                     'balance': balance,
                     'total_transactions': transactions,
-                    'plan': "NP"  # Default to NP (Non student)
+                    'plan': plan  # SP or NP
                 })
 
             except Exception as e:
