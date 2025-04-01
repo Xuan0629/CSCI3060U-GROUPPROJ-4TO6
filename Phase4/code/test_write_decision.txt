@@ -1,2 +1,0 @@
-00000 abcefghijklmnopqrstu A 99999.99 9999 SP
-00000 END OF FILE          A 00000.00 0000 NP
