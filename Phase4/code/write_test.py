@@ -218,6 +218,7 @@ def main():
     loop_coverage.append(loop_coverage_one)
     loop_coverage.append(loop_coverage_two)
     loop_coverage.append(loop_coverage_many)
+    #Make each loop coverage output to different txt file.
     for i in loop_coverage:
         try:
             print("\n", i)
