@@ -1,0 +1,5 @@
+00000 one of many          A 99999.99 9999 SP
+00000 two of many          A 99999.99 9999 SP
+00000 three of many        A 99999.99 9999 SP
+00000 four of many         A 99999.99 9999 SP
+00000 END OF FILE          A 00000.00 0000 NP
