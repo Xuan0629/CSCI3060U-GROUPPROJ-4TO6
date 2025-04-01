@@ -14,31 +14,46 @@ class Transaction:
         self.misc = misc
 
     @staticmethod
-    def read_merged_transaction(line: str):
+    def read_transaction_file(file_path):
         """
-        Parses a 40-char transaction line into a Transaction object.
+        Reads the merged Bank Account Transaction file.
+        Returns a list of Transaction objects.
+        Stops reading when it encounters "00" at the start of a line.
         """
-        if len(line) != 40:
-            log_constraint_error("Fatal error", "Invalid transaction line length (expected 40).")
-            return None
+        transactions = []
+        with open(file_path, 'r') as file:
+            for line_num, line in enumerate(file, 1):
+                # Remove newline but preserve other characters
+                clean_line = line.rstrip('\n')
+                
+                # Check for end of transaction marker
+                if clean_line.startswith("00"):
+                    break
 
-        # Extract fields using correct indices
-        code = line[0:2]
-        name = line[3:23].rstrip("_")
-        acctNum = line[24:29]
-        amountStr = line[30:37]
-        misc = line[38:40]
+                # Validate line length
+                if len(clean_line) != 40:
+                    log_constraint_error("Fatal error", f"Line {line_num}: Invalid transaction line length (expected 40).")
+                    continue
 
-        # Validate account number format
-        if not acctNum.isdigit() or len(acctNum) != 5:
-            log_constraint_error("Fatal error", f"Invalid account number format: {acctNum}")
-            return None
+                # Extract fields using correct indices
+                code = clean_line[0:2]
+                name = clean_line[3:23].rstrip("_")
+                acctNum = clean_line[24:29]
+                amountStr = clean_line[30:37]
+                misc = clean_line[38:40]
 
-        # Convert amountStr
-        try:
-            amount = float(amountStr)
-        except ValueError:
-            log_constraint_error("Fatal error", f"Could not parse transaction amount '{amountStr}'.")
-            amount = 0.0
+                # Validate account number format
+                if not acctNum.isdigit() or len(acctNum) != 5:
+                    log_constraint_error("Fatal error", f"Line {line_num}: Invalid account number format: {acctNum}")
+                    continue
 
-        return Transaction(code, name, acctNum, amount, misc)
+                # Convert amountStr
+                try:
+                    amount = float(amountStr)
+                except ValueError:
+                    log_constraint_error("Fatal error", f"Line {line_num}: Could not parse transaction amount '{amountStr}'.")
+                    continue
+
+                transactions.append(Transaction(code, name, acctNum, amount, misc))
+
+        return transactions

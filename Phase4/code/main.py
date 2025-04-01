@@ -1,6 +1,7 @@
 import sys
 from transaction_processor import TransactionProcessor
-from write import write_new_master_bank_accounts, write_new_current_accounts
+from write import write_new_current_accounts
+from write_new_master_bank_accounts import write_new_master_bank_accounts
 
 def main():
     """
