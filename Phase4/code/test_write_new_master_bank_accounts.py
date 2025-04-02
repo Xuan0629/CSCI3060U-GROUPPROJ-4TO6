@@ -161,6 +161,12 @@ def create_test_account(account_number, name, status, balance, transactions, pla
 #         content = f.read()
 #         assert "99999 Max Length Name Here A 99999.99 9999 SP" in content
 
+# Cleanup test output after test
+# def teardown_module(module):
+#     """Clean up test files after all tests"""
+#     if os.path.exists("test_write_new_master_bank_accounts_output.txt"):
+#         os.remove("test_write_new_master_bank_accounts_output.txt")
+
 # =============================================
 # Version 2: Output File Version
 # This version writes all test results to a file
@@ -310,11 +316,3 @@ def teardown_module(module):
     # Clean up temporary files after all tests
     if os.path.exists("temp_output.txt"):
         os.remove("temp_output.txt")
-
-
-# Cleanup test output after test, if you want to use version1, please comment out this function
-# However, if you want to use version2 to get all test output in one file, please comment this function.
-# def teardown_module(module):
-#     """Clean up test files after all tests"""
-#     if os.path.exists("test_write_new_master_bank_accounts_output.txt"):
-#         os.remove("test_write_new_master_bank_accounts_output.txt")
