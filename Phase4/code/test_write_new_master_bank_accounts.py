@@ -58,7 +58,8 @@ def create_test_account(account_number, name, status, balance, transactions, pla
 #         write_new_master_bank_accounts([invalid_account], "test_write_new_master_bank_accounts_output.txt")
 
 # def test_status_validation():
-#     """Test status validation:
+#     """
+#     Test status validation:
 #     - Invalid status (not 'A' or 'D')
 #     """
 #     invalid_account = create_test_account("00001", "Test Name", "X", 1000.00, 0, "NP")
