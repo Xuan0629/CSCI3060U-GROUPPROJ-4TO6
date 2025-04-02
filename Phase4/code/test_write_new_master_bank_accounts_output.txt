@@ -1,0 +1,57 @@
+=== Test Results ===
+
+
+=== Account Number Validation ===
+Expected error for account 12345: Invalid account number: 12345
+Expected error for account abcde: Invalid account number: abcde
+Expected error for account 123456: Account number too long: 123456
+==================================================
+
+=== Name Validation ===
+Expected error: Name exceeds 20 characters: This is a very long name that exceeds 20 characters
+==================================================
+
+=== Status Validation ===
+Expected error: Invalid status: X
+==================================================
+
+=== Balance Validation ===
+Expected error for balance 1000.00: Invalid balance type: <class 'str'>
+Expected error for balance 100000.0: Balance out of range: 100000.0
+Expected error for balance -1000.0: Balance out of range: -1000.0
+==================================================
+
+=== Transaction Count Validation ===
+Expected error for transaction count 0: Invalid transaction count type: <class 'str'>
+Expected error for transaction count 10000: Transaction count out of range: 10000
+Expected error for transaction count -1: Transaction count out of range: -1
+==================================================
+
+=== Plan Type Validation ===
+Expected error: Invalid plan type: XX
+==================================================
+
+=== Empty Account List ===
+00000 END OF FILE          A 00000.00 0000 NP
+
+==================================================
+
+=== Single Account ===
+00001 Test Name            A 01000.00 0000 NP
+00000 END OF FILE          A 00000.00 0000 NP
+
+==================================================
+
+=== Multiple Accounts ===
+00001 First Account        A 01000.00 0000 NP
+00002 Second Account       A 02000.00 0000 SP
+00003 Third Account        A 03000.00 0000 NP
+00000 END OF FILE          A 00000.00 0000 NP
+
+==================================================
+
+=== Boundary Values ===
+99999 Max Length Name Here A 99999.99 9999 SP
+00000 END OF FILE          A 00000.00 0000 NP
+
+==================================================
