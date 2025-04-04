@@ -2,8 +2,9 @@
 
 
 === Empty Transaction List ===
+Test Case 01:
 Initial balance: 0.25
-Final balance: 0.25
+Final balance: 0.0
 ==================================================
 
 === Withdrawal Tests ===
@@ -28,27 +29,42 @@ Note: Transaction rejected due to insufficient funds
 ==================================================
 
 === Transfer Tests ===
-Transfer Test:
+Test Case 05:
 Sender initial balance: 0.25
 Receiver initial balance: 0.0
 Transfer amount: 0.15
 Fee: 0.10
 Sender final balance: 0.0
 Receiver final balance: 0.15
+
+Test Case 06:
+Initial balance: 0.0
+Withdrawal amount: 0.15
+Fee: 0.10
+Final balance: 0.0
+Note: Transaction rejected due to insufficient funds
 ==================================================
 
 === Bill Payment Tests ===
-Bill Payment Test:
+Test Case 08:
 Payer initial balance: 0.25
 Company initial balance: 0.0
 Payment amount: 0.15
 Fee: 0.10
 Payer final balance: 0.0
 Company final balance: 0.15
+
+Test Case 09:
+Payer initial balance: 0.25
+Company initial balance: 0.0
+Payment amount: 0.15
+Fee: 0.10
+Payer final balance: 0.0
+Company final balance: 0.15 Note: Transaction rejected due to insufficient funds
 ==================================================
 
 === Deposit Tests ===
-Deposit Test:
+Test Case 09:
 Initial balance: 0.05
 Deposit amount: 0.15
 Fee: 0.10
@@ -56,7 +72,7 @@ Final balance: 0.09999999999999999
 ==================================================
 
 === Account Creation Tests ===
-Account Creation Test:
+Test Case 10:
 Account number: 54321
 Name: Alice
 Initial balance: 0.0
@@ -65,7 +81,7 @@ Plan: NP
 ==================================================
 
 === Account Deletion Tests ===
-Account Deletion Test:
+Test Case 11:
 Initial account status: Account exists
 Account number: 12345
 Balance: 0.25
@@ -74,12 +90,19 @@ Final account status: Account deleted
 ==================================================
 
 === Account Disable Tests ===
-Account Disable Test:
+Test Case 12:
 Initial status: Active
 Initial balance: 0.25
 Fee: 0.10
 Final status: D
 Final balance: 0.15
+
+Test Case 13:
+Initial status: Active
+Initial balance: 0.0
+Fee: 0.10
+Final status: A
+Final balance: 0.0 Note: Transaction rejected due to insufficient funds
 ==================================================
 
 === Plan Change Tests ===
@@ -89,4 +112,11 @@ Initial balance: 0.25
 Fee: 0.10
 New plan: SP
 Final balance: 0.15
+
+Plan Change Test:
+Initial plan: NP
+Initial balance: 0.0
+Fee: 0.10
+New plan: NP
+Final balance: 0.0 Note: Transaction rejected due to insufficient funds
 ==================================================

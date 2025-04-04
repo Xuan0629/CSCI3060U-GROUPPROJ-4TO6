@@ -54,20 +54,21 @@ def test_empty_list():
     #     system.applyTransactions([])
 
     # New code
+    #Test Case 01
     account = create_test_accounts(
         "12345",
         "Bob",
         "A",
-        0.25,
+        0.0,
         0,
         "NP"
     )
     system.accounts["12345"] = account
     # Empty transaction list should be processed without error
     system.applyTransactions([])
-    result = f"Initial balance: 0.25\nFinal balance: {system.accounts['12345']['balance']}"
+    result = f"Test Case 01:\nInitial balance: 0.25\nFinal balance: {system.accounts['12345']['balance']}"
     append_test_result("Empty Transaction List", result)
-    assert system.accounts["12345"]["balance"] == 0.25
+    assert system.accounts["12345"]["balance"] == 0.0
 
 def test_withdrawal():
     """Test withdrawal transactions"""
@@ -241,10 +242,17 @@ def test_transfer():
     system.accounts["12345"] = account1
     system.accounts["23456"] = account2
 
-    # Test Case: Successful transfer
+    # # Test Case 05: Successful transfer
     txn = MockTransaction("02", "12345", 0.15, misc="23456")
     system.applyTransactions([txn])
-    results.append(f"Transfer Test:\nSender initial balance: 0.25\nReceiver initial balance: 0.0\nTransfer amount: 0.15\nFee: 0.10\nSender final balance: {system.accounts['12345']['balance']}\nReceiver final balance: {system.accounts['23456']['balance']}")
+    results.append(f"Test Case 05:\nSender initial balance: 0.25\nReceiver initial balance: 0.0\nTransfer amount: 0.15\nFee: 0.10\nSender final balance: {system.accounts['12345']['balance']}\nReceiver final balance: {system.accounts['23456']['balance']}")
+    assert system.accounts["12345"]["balance"] == pytest.approx(0.0)
+    assert system.accounts["23456"]["balance"] == pytest.approx(0.15)
+
+    # Test Case 06: Unsuccessful transfer
+    txn = MockTransaction("02", "12345", 0.15, misc="23456")
+    system.applyTransactions([txn])
+    results.append(f"Test Case 06:\nInitial balance: 0.0\nWithdrawal amount: 0.15\nFee: 0.10\nFinal balance: {system.accounts['12345']['balance']}\nNote: Transaction rejected due to insufficient funds")
     assert system.accounts["12345"]["balance"] == pytest.approx(0.0)
     assert system.accounts["23456"]["balance"] == pytest.approx(0.15)
 
@@ -332,14 +340,23 @@ def test_pay_bill():
     )
     system.accounts["10000"] = company_account
 
-    # Test Case: Successful bill payment
+    # Test Case 08: Successful bill payment
     txn = MockTransaction("03", "12345", 0.15, misc="EC")
     system.applyTransactions([txn])
-    results.append(f"Bill Payment Test:\nPayer initial balance: 0.25\nCompany initial balance: 0.0\nPayment amount: 0.15\nFee: 0.10\nPayer final balance: {system.accounts['12345']['balance']}\nCompany final balance: {system.accounts['10000']['balance']}")
+    results.append(f"Test Case 08:\nPayer initial balance: 0.25\nCompany initial balance: 0.0\nPayment amount: 0.15\nFee: 0.10\nPayer final balance: {system.accounts['12345']['balance']}\nCompany final balance: {system.accounts['10000']['balance']}")
     assert system.accounts["12345"]["balance"] == pytest.approx(0.0)
     assert system.accounts["10000"]["balance"] == pytest.approx(0.15)
 
+    # Test Case 09: Unsuccessful bill payment
+    txn = MockTransaction("03", "12345", 0.15, misc="EC")
+    system.applyTransactions([txn])
+    results.append(
+        f"Test Case 09:\nPayer initial balance: 0.25\nCompany initial balance: 0.0\nPayment amount: 0.15\nFee: 0.10\nPayer final balance: {system.accounts['12345']['balance']}\nCompany final balance: {system.accounts['10000']['balance']} Note: Transaction rejected due to insufficient funds")
+    assert system.accounts["12345"]["balance"] == pytest.approx(0.0)
+    assert system.accounts["10000"]["balance"] == pytest.approx(0.15)
     append_test_result("Bill Payment Tests", "\n\n".join(results))
+
+
 
 def test_deposit():
     """Test deposit transactions"""
@@ -374,10 +391,10 @@ def test_deposit():
     )
     system.accounts["12345"] = account
 
-    # Test Case: Successful deposit
+    # Test Case 09: Successful deposit
     txn = MockTransaction("04", "12345", 0.15)
     system.applyTransactions([txn])
-    results.append(f"Deposit Test:\nInitial balance: 0.05\nDeposit amount: 0.15\nFee: 0.10\nFinal balance: {system.accounts['12345']['balance']}")
+    results.append(f"Test Case 09:\nInitial balance: 0.05\nDeposit amount: 0.15\nFee: 0.10\nFinal balance: {system.accounts['12345']['balance']}")
     assert system.accounts["12345"]["balance"] == pytest.approx(0.10)
 
     append_test_result("Deposit Tests", "\n\n".join(results))
@@ -407,10 +424,10 @@ def test_create():
 
     # New code
     results = []
-    # Test Case: Create new account
+    # Test Case 10: Create new account
     txn = MockTransaction("05", "54321", 0.0, name="Alice")
     system.applyTransactions([txn])
-    results.append(f"Account Creation Test:\nAccount number: 54321\nName: Alice\nInitial balance: {system.accounts['54321']['balance']}\nStatus: {system.accounts['54321']['status']}\nPlan: {system.accounts['54321']['plan']}")
+    results.append(f"Test Case 10:\nAccount number: 54321\nName: Alice\nInitial balance: {system.accounts['54321']['balance']}\nStatus: {system.accounts['54321']['status']}\nPlan: {system.accounts['54321']['plan']}")
     assert "54321" in system.accounts
     assert system.accounts["54321"]["balance"] == 0.0
     assert system.accounts["54321"]["name"] == "Alice"
@@ -450,9 +467,9 @@ def test_delete():
     )
     system.accounts["12345"] = account
 
-    # Test Case: Delete existing account
+    # Test Case 11: Delete existing account
     txn = MockTransaction("06", "12345")
-    results.append(f"Account Deletion Test:\nInitial account status: Account exists\nAccount number: 12345\nBalance: 0.25")
+    results.append(f"Test Case 11:\nInitial account status: Account exists\nAccount number: 12345\nBalance: 0.25")
     system.applyTransactions([txn])
     results.append(f"Final account status: {'Account deleted' if '12345' not in system.accounts else 'Account still exists'}")
     assert "12345" not in system.accounts
@@ -525,12 +542,30 @@ def test_disable():
     )
     system.accounts["12345"] = account
 
-    # Test Case: Disable account with sufficient balance for fee
+    # Test Case 12: Disable account with sufficient balance for fee
     txn = MockTransaction("07", "12345")
     system.applyTransactions([txn])
-    results.append(f"Account Disable Test:\nInitial status: Active\nInitial balance: 0.25\nFee: 0.10\nFinal status: {system.accounts['12345']['status']}\nFinal balance: {system.accounts['12345']['balance']}")
+    results.append(f"Test Case 12:\nInitial status: Active\nInitial balance: 0.25\nFee: 0.10\nFinal status: {system.accounts['12345']['status']}\nFinal balance: {system.accounts['12345']['balance']}")
     assert system.accounts["12345"]["status"] == "D"
     assert system.accounts["12345"]["balance"] == pytest.approx(0.15)
+
+    # Test Case 13: Disable account with insufficient balance for fee
+    account = create_test_accounts(
+        "12345",
+        "Bob",
+        "A",
+        0.0,
+        0,
+        "NP"
+    )
+    system.accounts["12345"] = account
+
+    txn = MockTransaction("07", "12345")
+    system.applyTransactions([txn])
+    results.append(
+        f"Test Case 13:\nInitial status: Active\nInitial balance: 0.0\nFee: 0.10\nFinal status: {system.accounts['12345']['status']}\nFinal balance: {system.accounts['12345']['balance']} Note: Transaction rejected due to insufficient funds")
+    assert system.accounts["12345"]["status"] == "A"
+    assert system.accounts["12345"]["balance"] == pytest.approx(0.0)
 
     append_test_result("Account Disable Tests", "\n\n".join(results))
 
@@ -604,14 +639,33 @@ def test_changeplan():
     )
     system.accounts["12345"] = account
 
-    # Test Case: Change plan with sufficient balance for fee
+    # Test Case 14: Change plan with sufficient balance for fee
     txn = MockTransaction("08", "12345", misc="SP")
     system.applyTransactions([txn])
     results.append(f"Plan Change Test:\nInitial plan: NP\nInitial balance: 0.25\nFee: 0.10\nNew plan: {system.accounts['12345']['plan']}\nFinal balance: {system.accounts['12345']['balance']}")
     assert system.accounts["12345"]["plan"] == "SP"
     assert system.accounts["12345"]["balance"] == pytest.approx(0.15)
 
+    # Test Case 15: Change plan with insufficient balance for fee
+    account = create_test_accounts(
+        "12345",
+        "Bob",
+        "A",
+        0.0,
+        0,
+        "NP"
+    )
+    system.accounts["12345"] = account
+
+    txn = MockTransaction("08", "12345", misc="SP")
+    system.applyTransactions([txn])
+    results.append(
+        f"Plan Change Test:\nInitial plan: NP\nInitial balance: 0.0\nFee: 0.10\nNew plan: {system.accounts['12345']['plan']}\nFinal balance: {system.accounts['12345']['balance']} Note: Transaction rejected due to insufficient funds")
+    assert system.accounts["12345"]["plan"] == "NP"
+    assert system.accounts["12345"]["balance"] == pytest.approx(0.0)
+
     append_test_result("Plan Change Tests", "\n\n".join(results))
+
 
 def teardown_module(module):
     """Clean up temporary files after all tests"""
