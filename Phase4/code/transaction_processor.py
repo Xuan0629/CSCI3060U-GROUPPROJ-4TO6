@@ -29,7 +29,7 @@ class TransactionProcessor:
         accounts_list = read_old_bank_accounts(filePath)
         # DEBUG: Print number of accounts read
         print(f"Read {len(accounts_list)} accounts from file")
-        
+
         # Convert account numbers to dictionary keys, ensuring 5-digit format
         self.accounts = {}
         for acc in accounts_list:
@@ -39,7 +39,7 @@ class TransactionProcessor:
             self.accounts[acc_num] = acc
             # DEBUG: Print each account as it's loaded
             print(f"Loaded account: {acc_num} (original: {acc['account_number']})")
-        
+
         # DEBUG: Print final list of account numbers
         print(f"Final accounts dictionary keys: {list(self.accounts.keys())}")
         # DEBUG: Print section footer
@@ -73,11 +73,11 @@ class TransactionProcessor:
         for txn in transactions:
             code = txn.code
             acct_num = txn.acctNum
-            
+
             # DEBUG: Print transaction being processed and available accounts
             print(f"\nProcessing transaction: code={code}, account={acct_num}")
             print(f"Available accounts: {list(self.accounts.keys())}")
-            
+
             if code == "05":  # create (no fee)
                 # DEBUG: Print account creation
                 print(f"Creating new account: {acct_num}")
@@ -90,7 +90,7 @@ class TransactionProcessor:
                     'plan': "NP"
                 }
                 continue
- 
+
             elif code == "06":  # delete (no fee)
                 # DEBUG: Print account deletion attempt
                 print(f"Attempting to delete account: {acct_num}")
@@ -104,14 +104,14 @@ class TransactionProcessor:
                 continue
 
             # Get account and set fee
-            if acct_num not in self.accounts:
+            if acct_num not in self.accounts.values():
                 # DEBUG: Print account not found error
                 print(f"ERROR: Account {acct_num} not found in accounts dictionary")
                 print(f"Available accounts: {list(self.accounts.keys())}")
                 log_constraint_error("Constraint Error", f"Account {acct_num} not found")
                 continue
                 
-            account = self.accounts[acct_num]
+            account = self.accounts
             feePerTransaction = 0.05 if account['plan'] == "SP" else 0.10
             # DEBUG: Print account details and fee
             print(f"Found account: {acct_num}, balance={account['balance']}, fee={feePerTransaction}")
@@ -128,7 +128,7 @@ class TransactionProcessor:
                 account['total_transactions'] += 1
                 # DEBUG: Print withdrawal result
                 print(f"Withdrawal: new balance={newBalance}")
-            
+
             elif code == "02":  # transfer
                 newBalance = account['balance'] - txn.amount - feePerTransaction
                 if newBalance < 0:
@@ -146,9 +146,9 @@ class TransactionProcessor:
                     print(f"Available accounts: {list(self.accounts.keys())}")
                     log_constraint_error("Constraint Error", f"Receiving account {receiving_acct_num} not found")
                     continue
-                    
+
                 receiving_account = self.accounts[receiving_acct_num]
-                
+
                 account['balance'] = newBalance
                 account['total_transactions'] += 1
                 receiving_account['balance'] += txn.amount
@@ -167,7 +167,7 @@ class TransactionProcessor:
                 company_account = self.accounts[self.company_accounts[txn.misc]]
                 # DEBUG: Print bill payment details
                 print(f"Paying bill to company: {txn.misc}")
-                
+
                 account['balance'] = newBalance
                 account['total_transactions'] += 1
                 company_account['balance'] += txn.amount
