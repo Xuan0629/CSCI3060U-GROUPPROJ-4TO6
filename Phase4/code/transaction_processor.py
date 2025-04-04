@@ -104,14 +104,14 @@ class TransactionProcessor:
                 continue
 
             # Get account and set fee
-            if acct_num not in self.accounts.values():
+            if acct_num not in self.accounts:
                 # DEBUG: Print account not found error
                 print(f"ERROR: Account {acct_num} not found in accounts dictionary")
                 print(f"Available accounts: {list(self.accounts.keys())}")
                 log_constraint_error("Constraint Error", f"Account {acct_num} not found")
                 continue
                 
-            account = self.accounts
+            account = self.accounts[acct_num]
             feePerTransaction = 0.05 if account['plan'] == "SP" else 0.10
             # DEBUG: Print account details and fee
             print(f"Found account: {acct_num}, balance={account['balance']}, fee={feePerTransaction}")
@@ -137,7 +137,7 @@ class TransactionProcessor:
                     log_constraint_error("Constraint Error", f"Fee caused overdraw for account {account['account_number']}")
                     continue
 
-                receiving_acct_num = txn.misc
+                receiving_acct_num = txn.misc.rjust(5,"0")
                 # DEBUG: Print transfer details
                 print(f"Transfer to account: {receiving_acct_num}")
                 if receiving_acct_num not in self.accounts:

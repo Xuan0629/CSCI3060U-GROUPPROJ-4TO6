@@ -1,0 +1,92 @@
+=== Test Results ===
+
+
+=== Empty Transaction List ===
+Initial balance: 0.25
+Final balance: 0.25
+==================================================
+
+=== Withdrawal Tests ===
+Test Case 02:
+Initial balance: 0.25
+Withdrawal amount: 0.15
+Fee: 0.10
+Final balance: 0.0
+
+Test Case 03:
+Initial balance: 0.25
+Withdrawal amount: 0.05
+Fee: 0.10
+Final balance: 0.1
+
+Test Case 04:
+Initial balance: 0.25
+Withdrawal amount: 0.25
+Fee: 0.10
+Final balance: 0.25
+Note: Transaction rejected due to insufficient funds
+==================================================
+
+=== Transfer Tests ===
+Transfer Test:
+Sender initial balance: 0.25
+Receiver initial balance: 0.0
+Transfer amount: 0.15
+Fee: 0.10
+Sender final balance: 0.0
+Receiver final balance: 0.15
+==================================================
+
+=== Bill Payment Tests ===
+Bill Payment Test:
+Payer initial balance: 0.25
+Company initial balance: 0.0
+Payment amount: 0.15
+Fee: 0.10
+Payer final balance: 0.0
+Company final balance: 0.15
+==================================================
+
+=== Deposit Tests ===
+Deposit Test:
+Initial balance: 0.05
+Deposit amount: 0.15
+Fee: 0.10
+Final balance: 0.09999999999999999
+==================================================
+
+=== Account Creation Tests ===
+Account Creation Test:
+Account number: 54321
+Name: Alice
+Initial balance: 0.0
+Status: A
+Plan: NP
+==================================================
+
+=== Account Deletion Tests ===
+Account Deletion Test:
+Initial account status: Account exists
+Account number: 12345
+Balance: 0.25
+
+Final account status: Account deleted
+==================================================
+
+=== Account Disable Tests ===
+Account Disable Test:
+Initial status: Active
+Initial balance: 0.25
+Fee: 0.10
+Final status: D
+Final balance: 0.15
+==================================================
+
+=== Plan Change Tests ===
+Plan Change Test:
+Initial plan: NP
+Initial balance: 0.25
+Fee: 0.10
+New plan: SP
+Final balance: 0.15
+==================================================

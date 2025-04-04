@@ -1,4 +1,4 @@
-00001 John Doe             A 00999.70 NP
+00001 John Doe             A 00799.60 NP
 00003 Bob Wilson           D 02999.90 NP
 00004 Alice Brown          A 03999.90 SP
 00005 Mike Johnson         A 00500.00 NP
