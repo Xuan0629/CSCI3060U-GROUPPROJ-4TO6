@@ -46,7 +46,7 @@ Note: Transaction rejected due to insufficient funds
 ==================================================
 
 === Bill Payment Tests ===
-Test Case 08:
+Test Case 07:
 Payer initial balance: 0.25
 Company initial balance: 0.0
 Payment amount: 0.15
@@ -54,7 +54,7 @@ Fee: 0.10
 Payer final balance: 0.0
 Company final balance: 0.15
 
-Test Case 09:
+Test Case 08:
 Payer initial balance: 0.25
 Company initial balance: 0.0
 Payment amount: 0.15
@@ -106,14 +106,14 @@ Final balance: 0.0 Note: Transaction rejected due to insufficient funds
 ==================================================
 
 === Plan Change Tests ===
-Plan Change Test:
+Test Case 14:
 Initial plan: NP
 Initial balance: 0.25
 Fee: 0.10
 New plan: SP
 Final balance: 0.15
 
-Plan Change Test:
+Test Case 15:
 Initial plan: NP
 Initial balance: 0.0
 Fee: 0.10

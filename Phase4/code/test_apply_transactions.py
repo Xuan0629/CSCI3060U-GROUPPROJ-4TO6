@@ -39,21 +39,6 @@ def append_test_result(test_name, content):
 def test_empty_list():
     """Test empty transaction list handling"""
     system = TransactionProcessor()
-    # Old code
-    # system.accounts = create_test_accounts(
-    #     '12345',
-    #     "Bob",
-    #     "A",
-    #     0.25,
-    #     0,
-    #     "NP"
-    # )
-    # # Test Case 01
-    # # Should throw error as list of transactions is empty
-    # with pytest.raises(ValueError):
-    #     system.applyTransactions([])
-
-    # New code
     #Test Case 01
     account = create_test_accounts(
         "12345",
@@ -73,62 +58,6 @@ def test_empty_list():
 def test_withdrawal():
     """Test withdrawal transactions"""
     system = TransactionProcessor()
-    # Old code
-    # system.accounts = create_test_accounts(
-    #     '12345',
-    #     "Bob",
-    #     "A",
-    #     0.25,
-    #     0,
-    #     "NP"
-    # )
-    # # Test Case 02
-    # # newBalance will be 0.0
-    # txn1 = type('Txn', (),
-    #             {'code': "01",
-    #              'acctNum': "12345",
-    #              'amount': 0.15})
-    # system.applyTransactions([txn1])
-    # assert system.accounts.get("balance") == pytest.approx(0.0)
-
-    # system.accounts = create_test_accounts(
-    #     '12345',
-    #     "Bob",
-    #     "A",
-    #     0.25,
-    #     0,
-    #     "NP"
-    # )
-
-    # # Test Case 03
-    # # newBalance will be 0.1
-    # txn2 = type('Txn', (),
-    #             {'code': "01",
-    #              'acctNum': "12345",
-    #              'amount': 0.05})
-    # system.applyTransactions([txn2])
-    # assert system.accounts.get("balance") == pytest.approx(0.1)
-
-    # system.accounts = create_test_accounts(
-    #     '12345',
-    #     "Bob",
-    #     "A",
-    #     0.25,
-    #     0,
-    #     "NP"
-    # )
-
-    # # Test Case 04
-    # # Will throw error as balance will be -0.1
-    # txn3 = type('Txn', (),
-    #             {'code': "01",
-    #              'acctNum': "12345",
-    #              'amount': 0.25})
-    # with pytest.raises(ValueError, match="overdraw"):
-    #     system.applyTransactions([txn3])
-    # assert system.accounts["12345"]["balance"] == pytest.approx(0.25)
-
-    # New code
     results = []
     
     # Test Case 02: newBalance will be 0.0
@@ -181,47 +110,6 @@ def test_withdrawal():
 def test_transfer():
     """Test transfer transactions"""
     system = TransactionProcessor()
-    # Old code
-    # system.accounts = create_test_accounts(
-    #     '12345',
-    #      "Bob",
-    #      "A",
-    #      0.25,
-    #      0,
-    #      "NP"
-    # )
-
-    # # Test Case 05
-    # # newBalance will be 0.0
-    # txn1 = type('Txn', (),
-    #             {'code': "02",
-    #              'acctNum': "12345",
-    #              'amount': 0.15,
-    #              'misc': '23456'})
-    # system.applyTransactions([txn1])
-
-    # assert system.accounts.get("balance") == pytest.approx(0.0)
-
-    # # Test Case 06
-    # # newBalance will be 0.1
-    # txn2 = type('Txn', (),
-    #             {'code': "02",
-    #              'acctNum': "12345",
-    #              'amount': 0.05})
-    # system.applyTransactions([txn2])
-    # assert system.accounts.get("balance") == pytest.approx(0.1)
-
-    # # Test Case 07
-    # # Will throw error as balance will be -0.1
-    # txn3 = type('Txn', (),
-    #             {'code': "02",
-    #              'acctNum': "12345",
-    #              'amount': 0.25})
-    # with pytest.raises(ValueError, match="overdraw"):
-    #     system.applyTransactions([txn3])
-    # assert system.accounts.get("balance") == pytest.approx(0.25)
-
-    # New code
     results = []
     account1 = create_test_accounts(
         "12345",
@@ -261,63 +149,6 @@ def test_transfer():
 def test_pay_bill():
     """Test bill payment transactions"""
     system = TransactionProcessor()
-    # Old code
-    # system.accounts = create_test_accounts(
-    #     '12345',
-    #     "Bob",
-    #     "A",
-    #     0.25,
-    #     0,
-    #     "NP"
-    # )
-
-    # # Test Case 08
-    # # newBalance will be 0.0
-    # txn1 = type('Txn', (),
-    #             {'code': "03",
-    #              'acctNum': "12345",
-    #              'amount': 0.15})
-    # system.applyTransactions([txn1])
-    # assert system.accounts.get("balance") == pytest.approx(0.0)
-
-    # system.accounts = create_test_accounts(
-    #     '12345',
-    #     "Bob",
-    #     "A",
-    #     0.25,
-    #     0,
-    #     "NP"
-    # )
-
-    # # Test Case 09
-    # # newBalance will be 0.1
-    # txn2 = type('Txn', (),
-    #             {'code': "03",
-    #              'acctNum': "12345",
-    #              'amount': 0.05})
-    # system.applyTransactions([txn2])
-    # assert system.accounts["12345"]["balance"] == pytest.approx(0.1)
-
-    # system.accounts = create_test_accounts(
-    #     '12345',
-    #     "Bob",
-    #     "A",
-    #     0.25,
-    #     0,
-    #     "NP"
-    # )
-
-    # # Test Case 10
-    # # Will throw error as newBalance will be -0.1
-    # txn3 = type('Txn', (),
-    #             {'code': "03",
-    #              'acctNum': "12345",
-    #              'amount': 0.25})
-    # with pytest.raises(ValueError, match="overdraw"):
-    #     system.applyTransactions([txn3])
-    # assert system.accounts.get("balance") == pytest.approx(0.25)
-
-    # New code
     results = []
     account = create_test_accounts(
         "12345",
@@ -340,18 +171,18 @@ def test_pay_bill():
     )
     system.accounts["10000"] = company_account
 
-    # Test Case 08: Successful bill payment
+    # Test Case 07: Successful bill payment
     txn = MockTransaction("03", "12345", 0.15, misc="EC")
     system.applyTransactions([txn])
-    results.append(f"Test Case 08:\nPayer initial balance: 0.25\nCompany initial balance: 0.0\nPayment amount: 0.15\nFee: 0.10\nPayer final balance: {system.accounts['12345']['balance']}\nCompany final balance: {system.accounts['10000']['balance']}")
+    results.append(f"Test Case 07:\nPayer initial balance: 0.25\nCompany initial balance: 0.0\nPayment amount: 0.15\nFee: 0.10\nPayer final balance: {system.accounts['12345']['balance']}\nCompany final balance: {system.accounts['10000']['balance']}")
     assert system.accounts["12345"]["balance"] == pytest.approx(0.0)
     assert system.accounts["10000"]["balance"] == pytest.approx(0.15)
 
-    # Test Case 09: Unsuccessful bill payment
+    # Test Case 08: Unsuccessful bill payment
     txn = MockTransaction("03", "12345", 0.15, misc="EC")
     system.applyTransactions([txn])
     results.append(
-        f"Test Case 09:\nPayer initial balance: 0.25\nCompany initial balance: 0.0\nPayment amount: 0.15\nFee: 0.10\nPayer final balance: {system.accounts['12345']['balance']}\nCompany final balance: {system.accounts['10000']['balance']} Note: Transaction rejected due to insufficient funds")
+        f"Test Case 08:\nPayer initial balance: 0.25\nCompany initial balance: 0.0\nPayment amount: 0.15\nFee: 0.10\nPayer final balance: {system.accounts['12345']['balance']}\nCompany final balance: {system.accounts['10000']['balance']} Note: Transaction rejected due to insufficient funds")
     assert system.accounts["12345"]["balance"] == pytest.approx(0.0)
     assert system.accounts["10000"]["balance"] == pytest.approx(0.15)
     append_test_result("Bill Payment Tests", "\n\n".join(results))
@@ -361,25 +192,6 @@ def test_pay_bill():
 def test_deposit():
     """Test deposit transactions"""
     system = TransactionProcessor()
-    # Old code
-    # system.accounts = create_test_accounts(
-    #     '12345',
-    #     "Bob",
-    #     "A",
-    #     0.05,
-    #     0,
-    #     "NP"
-    # )
-    # # Test Case 11
-    # # newBalance will be 0.0
-    # txn3 = type('Txn', (),
-    #             {'code': "04",
-    #              'acctNum': "12345",
-    #              'amount': 0.05})
-    # system.applyTransactions([txn3])
-    # assert system.accounts.get("balance") == pytest.approx(0.0)
-
-    # New code
     results = []
     account = create_test_accounts(
         "12345",
@@ -402,27 +214,6 @@ def test_deposit():
 def test_create():
     """Test account creation transactions"""
     system = TransactionProcessor()
-    # Old code
-    # system.accounts = create_test_accounts(
-    #     '12345',
-    #     "Bob",
-    #     "A",
-    #     0.25,
-    #     0,
-    #     "NP"
-    # )
-    # # Test Case 12
-    # # newBalance will be 0.0
-    # txn1 = type('Txn', (),
-    #             {'code': "05",
-    #              'acctNum': "54321",
-    #              'amount': 0.0,
-    #              'name': "Alice"})
-
-    # system.applyTransactions([txn1])
-    # assert system.accounts["54321"]["balance"] == pytest.approx(0.0)
-
-    # New code
     results = []
     # Test Case 10: Create new account
     txn = MockTransaction("05", "54321", 0.0, name="Alice")
@@ -437,25 +228,6 @@ def test_create():
 def test_delete():
     """Test account deletion transactions"""
     system = TransactionProcessor()
-    # Old code
-    # system.accounts = create_test_accounts(
-    #     '12345',
-    #     "Bob",
-    #     "A",
-    #     0.25,
-    #     0,
-    #     "NP"
-    # )
-    # # Test Case 13
-    # # newBalance will be 0.0
-    # txn1 = type('Txn', (),
-    #             {'code': "06",
-    #              'acctNum': "12345",
-    #              'amount': 0.00})
-    # system.applyTransactions([txn1])
-    # assert system.accounts.get("balance") == pytest.approx(0.0)
-
-    # New code
     results = []
     account = create_test_accounts(
         "12345",
@@ -479,58 +251,6 @@ def test_delete():
 def test_disable():
     """Test account disable transactions"""
     system = TransactionProcessor()
-    # Old code
-    # system.accounts = create_test_accounts(
-    #     '12345',
-    #     "Bob",
-    #     "A",
-    #     0.1,
-    #     0,
-    #     "NP"
-    # )
-
-    # # Test Case 14
-    # # newBalance will be 0.0
-    # txn1 = type('Txn', (),
-    #             {'code': "07",
-    #              'acctNum': "12345"})
-    # system.applyTransactions([txn1])
-    # assert system.accounts.get("balance") == pytest.approx(0.0)
-
-    # # Test Case 15
-    # # newBalance will be 0.1
-    # system.accounts = create_test_accounts(
-    #     '23456',
-    #     "Bob",
-    #     "A",
-    #     0.2,
-    #     0,
-    #     "NP"
-    # )
-    # txn2 = type('Txn', (),
-    #             {'code': "07",
-    #              'acctNum': "23456"})
-    # system.applyTransactions([txn2])
-    # assert system.accounts.get("balance") == pytest.approx(0.1)
-
-    # # Test Case 16
-    # # Will throw error as balance will be -0.1
-    # system.accounts = create_test_accounts(
-    #     '23457',
-    #     "Bob",
-    #     "A",
-    #     0.0,
-    #     0,
-    #     "NP"
-    # )
-    # txn3 = type('Txn', (),
-    #             {'code': "07",
-    #              'acctNum': "23457"})
-    # with pytest.raises(ValueError, match="overdraw"):
-    #     system.applyTransactions([txn3])
-    # assert system.accounts.get("balance") == pytest.approx(0.25)
-
-    # New code
     results = []
     account = create_test_accounts(
         "12345",
@@ -572,62 +292,6 @@ def test_disable():
 def test_changeplan():
     """Test plan change transactions"""
     system = TransactionProcessor()
-    # Old code
-    # system.accounts = create_test_accounts(
-    #     '12345',
-    #     "Bob",
-    #     "A",
-    #     0.1,
-    #     0,
-    #     "NP"
-    # )
-    # # Test Case 17
-    # # newBalance will be -0.1
-    # txn1 = type('Txn', (),
-    #             {'code': "08",
-    #              'acctNum': "12345",
-    #              'misc': "SP"})
-    # system.applyTransactions([txn1])
-    # assert system.accounts.get("balance") == pytest.approx(0.0)
-
-    # # Test Case 18
-    # # newBalance will be 0.1
-    # system.accounts = create_test_accounts(
-    #     '12346',
-    #     "Bob",
-    #     "A",
-    #     0.2,
-    #     0,
-    #     "NP"
-    # )
-    # txn2 = type('Txn', (),
-    #             {'code': "08",
-    #              'acctNum': "12346",
-    #             'misc': "SP"})
-    # system.applyTransactions([txn2])
-    # assert system.accounts.get("balance") == pytest.approx(0.1)
-
-
-    # #Test Case 19
-    # #Will throw error as balance will be -0.1
-    # system.accounts = create_test_accounts(
-    #     '12347',
-    #     "Bob",
-    #     "A",
-    #     0.0,
-    #     0,
-    #     "NP"
-    # )
-
-    # txn3 = type('Txn', (),
-    #             {'code': "08",
-    #              'acctNum': "12347",
-    #              'misc': "SP"})
-    # with pytest.raises(ValueError, match="overdraw"):
-    #     system.applyTransactions([txn3])
-    # assert system.accounts.get("balance") == pytest.approx(0.25)
-
-    # New code
     results = []
     account = create_test_accounts(
         "12345",
@@ -642,7 +306,7 @@ def test_changeplan():
     # Test Case 14: Change plan with sufficient balance for fee
     txn = MockTransaction("08", "12345", misc="SP")
     system.applyTransactions([txn])
-    results.append(f"Plan Change Test:\nInitial plan: NP\nInitial balance: 0.25\nFee: 0.10\nNew plan: {system.accounts['12345']['plan']}\nFinal balance: {system.accounts['12345']['balance']}")
+    results.append(f"Test Case 14:\nInitial plan: NP\nInitial balance: 0.25\nFee: 0.10\nNew plan: {system.accounts['12345']['plan']}\nFinal balance: {system.accounts['12345']['balance']}")
     assert system.accounts["12345"]["plan"] == "SP"
     assert system.accounts["12345"]["balance"] == pytest.approx(0.15)
 
@@ -660,7 +324,7 @@ def test_changeplan():
     txn = MockTransaction("08", "12345", misc="SP")
     system.applyTransactions([txn])
     results.append(
-        f"Plan Change Test:\nInitial plan: NP\nInitial balance: 0.0\nFee: 0.10\nNew plan: {system.accounts['12345']['plan']}\nFinal balance: {system.accounts['12345']['balance']} Note: Transaction rejected due to insufficient funds")
+        f"Test Case 15:\nInitial plan: NP\nInitial balance: 0.0\nFee: 0.10\nNew plan: {system.accounts['12345']['plan']}\nFinal balance: {system.accounts['12345']['balance']} Note: Transaction rejected due to insufficient funds")
     assert system.accounts["12345"]["plan"] == "NP"
     assert system.accounts["12345"]["balance"] == pytest.approx(0.0)
 
