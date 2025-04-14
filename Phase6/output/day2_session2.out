@@ -1,0 +1,5 @@
+Welcome to the banking system.
+Enter session type: standard
+Enter account holder name: John Doe
+Transfer successful. New balance: $9,599.80 (Account 00001), $3,300.00 (Account 00002).
+Session terminated.

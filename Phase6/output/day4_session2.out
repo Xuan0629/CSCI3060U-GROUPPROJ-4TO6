@@ -1,0 +1,5 @@
+Welcome to the banking system.
+Enter session type: standard
+Enter account holder name: Mike Johnson
+Transfer successful. New balance: $3,499.90 (Account 00008), $2,999.90 (Account 00004).
+Session terminated.

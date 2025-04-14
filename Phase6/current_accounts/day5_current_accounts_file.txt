@@ -1,0 +1,9 @@
+00000 END OF FILE          A 00000.00 NP
+00001 John Doe             A 08799.60 NP
+00002 Jane Smith           D 03299.90 NP
+00003 Bob Wilson           A 00799.75 SP
+00008 Mike Johnson         A 03999.90 NP
+10000 EC                   A 03200.00 NP
+20000 CQ                   A 01500.00 NP
+30000 FI                   A 00800.00 NP
+00000 END OF FILE          A 00000.00 NP

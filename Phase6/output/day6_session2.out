@@ -1,0 +1,5 @@
+Welcome to the banking system.
+Enter session type: standard
+Enter account holder name: Sarah Lee
+Transfer successful. New balance: $2,500.00 (Account 00009), $3,499.80 (Account 00008).
+Session terminated.

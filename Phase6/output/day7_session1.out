@@ -1,0 +1,7 @@
+Welcome to the banking system.
+Enter session type: admin
+Enter account holder name: Sarah Lee
+Enter account number: 00009
+Enter new plan: SP
+Plan change successful. New plan for account 00009 is SP.
+Session terminated.

@@ -1,0 +1,8 @@
+Welcome to the banking system.
+Enter session type: standard
+Enter account holder name: John Doe
+Transfer successful. New balance: $10,200.00 (Account 00001), $2,800.00 (Account 00002).
+Enter account name: 00001
+Enter Withdrawal amount: 100
+Withdrawal success
+Session terminated.

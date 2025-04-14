@@ -1,0 +1,7 @@
+00001 John Doe             A 11000.00 NP
+00002 Jane Smith           A 02000.00 NP
+00003 Bob Wilson           A 03000.00 NP
+00004 Alice Brown          A 04000.00 NP
+10000 EC                   A 00000.00 NP
+20000 CQ                   A 00000.00 NP
+30000 FI                   A 00000.00 NP

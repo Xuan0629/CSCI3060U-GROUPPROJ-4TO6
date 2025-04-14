@@ -1,0 +1,6 @@
+Welcome to the banking system.
+Enter session type: admin
+Enter account holder name: Alice Brown
+Enter account number: 00004
+Account with account number 00004 has been deleted successfully.
+Session terminated.
